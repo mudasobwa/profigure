@@ -1,6 +1,6 @@
 # Profigure
 
-###  *NB* The name alludes both to “pro” vs. “con” and to “pro” vs. “lite”. Enjoy.
+#### The name alludes both to “pro” vs. “con” and to “pro” vs. “lite”. Enjoy.
 
  Module to use as is, to monkeypatch it, or to extend in order to have
    nice and easy config files support.
@@ -11,28 +11,32 @@
 
  Say, we have the following `config.yml` file:
 
-     :version : '0.0.1'
-     :nested :
-       :sublevel :
-         :value : 'test'
-     :url : 'http://example.com'
-     :configs :
-       - 'config/test1.yml'
-       - 'config/test2.yml'
+```yaml
+:version : '0.0.1'
+:nested :
+    :sublevel :
+        :value : 'test'
+:url : 'http://example.com'
+:configs :
+    - 'config/test1.yml'
+    - 'config/test2.yml'
+```
 
  Then:
 
-     config = (Profigure.load 'config/config.yml').configure do
-       set :foo, 'bar'
-       set :fruits, ['orange', 'apple', 'banana']
-     end
+```ruby
+ config = (Profigure.load 'config/config.yml').configure do
+   set :foo, 'bar'
+   set :fruits, ['orange', 'apple', 'banana']
+ end
 
-     puts config.nested.sublevel.value
-     # ⇒ 'test'
-     config.nested = { :newvalue => 'test5' }
-     # ⇒ 'test5'
+ puts config.nested.sublevel.value
+ # ⇒ 'test'
+ config.nested = { :newvalue => 'test5' }
+ # ⇒ 'test5'
+```
 
- _Setting deeply nested values with this syntax is **not yet allowed**._
+_Setting deeply nested values with this syntax is **not yet allowed**._
 
 ----
 
@@ -41,20 +45,22 @@
 
   As an example, let’s take a look at the following code:
 
-      module ProfigureExt
-        extend Profigure
+```ruby
+module ProfigureExt
+    extend Profigure
 
-        def self.__configs key, *args
-          key = [*args] unless (args.empty?) # setter
+    def self.__configs key, *args
+        key = [*args] unless (args.empty?) # setter
 
-          @configs ||= ProfigureExt.clone
-          @configs.clear
+        @configs ||= ProfigureExt.clone
+        @configs.clear
 
-          key.each { |inc| @configs.push inc } unless key.nil?
+        key.each { |inc| @configs.push inc } unless key.nil?
 
-          @configs.to_hash
-        end
-      end
+        @configs.to_hash
+    end
+end
+```
 
   Here the handler is defined for `configs` section. Once found, the section
     will be passed to this handler, which apparently loads the content of

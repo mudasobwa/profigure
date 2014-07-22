@@ -1,0 +1,11 @@
+:version : '0.0.1'
+
+:nested :
+  :sublevel :
+    :value : 'test'
+
+:url : 'http://example.com'
+
+:configs :
+  - 'config/test1.yml'
+  - 'config/test2.yml'

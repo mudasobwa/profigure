@@ -1,13 +1,15 @@
 # Profigure
 
-#### The name alludes both to “pro” vs. “con” and to “pro” vs. “lite”. Enjoy.
+#### The name alludes both to “pro” vs. “con” and to “pro” vs. “lite”. Enjoy.       [![Build Status](https://travis-ci.org/mudasobwa/profigure.png)](https://travis-ci.org/mudasobwa/profigure)
+
+----
 
  Module to use as is, to monkeypatch it, or to extend in order to have
    nice and easy config files support.
 
  It’s designed to be as intuitive as possible.
 
- _Usages:_
+## Usage
 
  Say, we have the following `config.yml` file:
 
@@ -79,10 +81,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install profigure
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 

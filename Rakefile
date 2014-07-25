@@ -12,7 +12,7 @@ require 'cucumber/rake/task'
 desc 'Cucumber'
 Cucumber::Rake::Task.new(:features)
 
-task :default => [:features, :spec]
+task :default => [:features]
 
 require 'yard'
 desc 'YARD'

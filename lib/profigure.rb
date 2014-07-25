@@ -143,11 +143,11 @@ module Profigure
     def method_missing sym, *args, &cb
       if sym =~ /(.+)=$/
         sym = $1.to_sym
-        singleton_method(:"__#{sym}").call(args.first, args) if singleton_methods.include?(:"__#{sym}")
+        method(:"__#{sym}").call(args.first, args) if singleton_methods.include?(:"__#{sym}")
         self[sym] = args.first
       else
         singleton_methods.include?(:"__#{sym}") ?
-          singleton_method(:"__#{sym}").call(self[sym]) : self[sym]
+          method(:"__#{sym}").call(self[sym]) : self[sym]
       end
     end
 
